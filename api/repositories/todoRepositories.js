@@ -1,31 +1,34 @@
-const Todo = require('../models/Todo');
+const Prompt = require("../models/Prompt");
 
 module.exports = {
-  getTodos: async () => {
-    const todos = await Todo.find();
+  getPrompts: async () => {
+    const prompts = await Prompt.find();
 
-    return todos;
+    return prompts;
   },
-  getTodoById: async (id) => {
-    const todo = await Todo.findById(id);
+  getPromptById: async (id) => {
+    const prompt = await Prompt.findById(id);
 
-    return todo;
+    return prompt;
   },
-  createTodo: async (todoInfo) => {
-    const newTodo = await Todo.create(todoInfo);
+  createPrompt: async (PromptInfo) => {
+    const newPrompt = await Prompt.create(PromptInfo);
 
-    return newTodo;
+    return newPrompt;
   },
-  updateTodo: async (id, body) => {
-    const updatedTodo = await Todo.findByIdAndUpdate(
-      id,
-      body,
-      { new: true },
-    );
+  createPrompts: async (PromptsInfo) => {
+    const newPrompt = await Prompt.insertMany(PromptsInfo);
 
-    return updatedTodo;
+    return newPrompt;
   },
-  deleteTodo: async (id) => {
-    return await Todo.findByIdAndDelete(id);
+  updatePrompt: async (id, body) => {
+    const updatedPrompt = await Prompt.findByIdAndUpdate(id, body, {
+      new: true,
+    });
+
+    return updatedPrompt;
+  },
+  deletePrompt: async (id) => {
+    return await Prompt.findByIdAndDelete(id);
   },
 };
