@@ -4,7 +4,7 @@ const {
   getPromptById,
   updatePrompt,
   deletePrompt,
-} = require("../repositories/todoRepositories");
+} = require("../repositories/promptRepositories");
 
 module.exports = {
   list: async (req, res) => {
