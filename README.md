@@ -1,13 +1,13 @@
 ### prompt-api
 
-# Criar Python Virtual env
+# Criar Python Virtual env no diretório generators
 
-pip venv venv
+python -m  venv venv
 
 .\venv\Scripts\activate
 
 # Instalar depedências do Python
-pip install -r generators/requirements.txt
+pip install -r requirements.txt
 
 
 
