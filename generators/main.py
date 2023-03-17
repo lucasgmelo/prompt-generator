@@ -1,15 +1,22 @@
-import gen_image
-import gen_text
-from objects import Image
+from prompt_engine.engine import Engine
+import requests
 
-def imagine(list_size:int=1, img_size:int = 512):
+URL = 'http://localhost:3003/prompt'
+OPENAI_API_KEY = "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"
+
+if __name__ == '__main__':
     
-    prompts = gen_text.chatgpt_gen_prompts_list(list_size)
+    engine = Engine(openai_api_key = OPENAI_API_KEY)
 
-    imgs:list[Image] = []
-    for prompt in prompts:
-        img = gen_image.dalle2_gen_image(prompt)
-        imgs.append(img)
+    images = engine.imagine(1)
+    img = images[0]
 
-    return imgs
+    payload = {
+        'prompt':img.prompt, 
+        'image':img.bytstream 
+    }
 
+    #post request to url
+    post_response = requests.post(URL, json=payload)
+
+    

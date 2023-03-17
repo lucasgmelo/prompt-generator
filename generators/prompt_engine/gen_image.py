@@ -3,7 +3,7 @@ import replicate    #multi models API (using openjourney)
 
 import requests     #web requests
 
-from objects import Image
+from prompt_engine.objects import Image
 
 
 def dalle2_gen_image(prompt:str, 
@@ -24,7 +24,7 @@ def dalle2_gen_image(prompt:str,
     img = Image(prompt, 'png', stream)
 
     if encoded:
-         img.encode_b64()
+        img.encode_b64()
 
     #img.save("imgs/dalle2")
 
@@ -79,7 +79,7 @@ def openjourney_gen_image(client:replicate.Client, prompt: str,
 
 if __name__ == "__main__":
 
-    OPENAI_API_KEY = "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"
+    OPENAI_API_KEY = "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"
     REPLICATE_API_TOKEN = '961cbad6ad1fab74ad78a6e04d55631a737e0e7c' 
 
     openai.api_key = OPENAI_API_KEY

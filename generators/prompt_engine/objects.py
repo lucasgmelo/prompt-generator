@@ -2,6 +2,9 @@
 import base64
 import os
 
+import openai
+import replicate
+
 class Image:
 
     prompt:str = None
@@ -20,10 +23,10 @@ class Image:
 
         if self.encoded:
             save_format = 'b64'
+            file_name = 'img_' + self.format + '_' + "_".join(self.prompt.split(" "))
         else:
             save_format = self.format
-
-        file_name = "_".join(self.prompt.split(" "))
+            file_name = "_".join(self.prompt.split(" "))
         
         #go to images folder
         path = os.getcwd()
@@ -51,4 +54,5 @@ class Image:
 
     def to_jpeg(self) -> None:
         pass
+
 
