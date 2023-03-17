@@ -1,6 +1,6 @@
-import gen_image as gen_image
-import gen_text as gen_text
-from objects import Image
+import prompt_engine.gen_image as gen_image
+import prompt_engine.gen_text as gen_text
+from prompt_engine.objects import Image
 
 import openai
 import replicate
@@ -42,9 +42,13 @@ class Engine:
         if self.check_openai:
             prompts = gen_text.chatgpt_gen_prompts_list(list_size)
 
+            print(f'prompt = {prompts}')
+
             for prompt in prompts:
-                img = gen_image.dalle2_gen_image(prompt)
+                img = gen_image.dalle2_gen_image(prompt, encoded=True)
                 imgs.append(img)
+
+            print('images ok')
 
         return imgs
 

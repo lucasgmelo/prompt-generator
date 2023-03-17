@@ -1,8 +1,8 @@
 from prompt_engine.engine import Engine
 import requests
 
-URL = 'http://localhost:3003/prompt'
-OPENAI_API_KEY = "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"
+URL = 'http://localhost:3003'
+OPENAI_API_KEY = "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"
 
 if __name__ == '__main__':
     
@@ -13,10 +13,11 @@ if __name__ == '__main__':
 
     payload = {
         'prompt':img.prompt, 
-        'image':img.bytstream 
+        'image':img.to_string() 
     }
 
     #post request to url
     post_response = requests.post(URL, json=payload)
+    print('ok')
 
     

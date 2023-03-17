@@ -19,7 +19,7 @@ def dalle2_gen_image(prompt:str,
 
     img_url = response["data"][0]['url']
     stream = requests.get(img_url, stream=True).raw
-    stream = stream.data
+    stream:bytes = stream.data
 
     img = Image(prompt, 'png', stream)
 
@@ -65,7 +65,7 @@ def openjourney_gen_image(client:replicate.Client, prompt: str,
     } 
     response = version.predict(**inputs)
     stream = requests.get(response[0], stream=True).raw
-    stream = stream.data
+    stream:bytes = stream.data
 
     img = Image(prompt, 'png', stream)
     
@@ -75,29 +75,3 @@ def openjourney_gen_image(client:replicate.Client, prompt: str,
     #img.save("imgs/open_journey")
 
     return img
-
-
-if __name__ == "__main__":
-
-    OPENAI_API_KEY = "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"
-    REPLICATE_API_TOKEN = '961cbad6ad1fab74ad78a6e04d55631a737e0e7c' 
-
-    openai.api_key = OPENAI_API_KEY
-    replicate_client = replicate.Client(REPLICATE_API_TOKEN) 
-
-
-    PROMPT = ["Ninja squirrels fighting",
-          "mermaids on bicycles",
-          "magic carpet race",
-          "giraffe volleyball team"]
-
-
-    
-    #image = dalle2_gen_image(PROMPT[1])
-
-    #prompts_list = chatgpt_gen_prompts_list(PROMPT)
-    #print(prompts_list)
-
-    #img = openjourney_gen_image(replicate_client, PROMPT[2])
-    img = dalle2_gen_image(PROMPT[2])
-    print("SUCCESS")

@@ -57,14 +57,3 @@ def chatgpt_gen_prompts_list(num_imgs:int)->list[str]:
 
     return new_prompts
 
-
-if __name__ == "__main__":
-
-    OPENAI_API_KEY = "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"
-
-    openai.api_key = OPENAI_API_KEY
-
-    prompts_list = chatgpt_gen_prompts_list(1)
-    print(prompts_list)
-
-    print("SUCCESS")
