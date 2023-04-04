@@ -6,12 +6,18 @@ const {
   deletePrompt,
 } = require("../repositories/promptRepositories");
 
+const {
+  getList,
+  createList,
+  deleteList,
+} = require("../repositories/listRepositories");
+
 module.exports = {
   list: async (req, res) => {
     try {
-      const prompts = await getPrompts();
+      const lists = await getList();
 
-      res.send(prompts);
+      res.send(lists);
     } catch (error) {
       res.status(400).send(error);
     }
@@ -19,17 +25,9 @@ module.exports = {
   create: async (req, res) => {
     try {
       const newPrompt = await createPrompt(req.body);
+      await createList({ key: newPrompt.id });
 
       res.status(201).send(newPrompt);
-    } catch (error) {
-      res.status(400).send(error);
-    }
-  },
-  createMany: async (req, res) => {
-    try {
-      const newPrompts = await createPrompts(req.body);
-
-      res.status(201).send(newPrompts);
     } catch (error) {
       res.status(400).send(error);
     }
@@ -67,6 +65,7 @@ module.exports = {
       if (!prompt) return res.status(404).send({ message: "prompt not found" });
 
       await deletePrompt(req.params.id);
+      await deleteList(req.params.id);
 
       res.send({ message: "Deleted successfully" });
     } catch (error) {
