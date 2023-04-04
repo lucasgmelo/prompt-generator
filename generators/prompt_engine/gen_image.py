@@ -3,7 +3,7 @@ import replicate    #multi models API (using openjourney)
 
 import requests     #web requests
 
-from prompt_engine.objects import Image
+from prompt_engine.objects import GameObj
 
 
 def dalle2_gen_image(prompt:str, 
@@ -21,7 +21,7 @@ def dalle2_gen_image(prompt:str,
     stream = requests.get(img_url, stream=True).raw
     stream:bytes = stream.data
 
-    img = Image(prompt, 'png', stream)
+    img = GameObj(prompt, 'png', stream)
 
     if encoded:
         img.encode_b64()
@@ -30,8 +30,27 @@ def dalle2_gen_image(prompt:str,
 
     return img
 
+def openjourney_gen_image_hgg(prompt:str, encoded:bool=False) -> str:
+    API_URL = "https://api-inference.huggingface.co/models/prompthero/openjourney-v4"
+    headers = {"Authorization": "Bearer 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"}
 
-def openjourney_gen_image(client:replicate.Client, prompt: str, 
+    base_prompt = 'mdjrny-v4 style ' + prompt
+    payload = {"inputs": base_prompt,}
+
+
+    response = requests.post(API_URL, headers=headers, json=payload)
+    stream = response.content
+
+
+    img = GameObj(prompt, 'png', stream)
+
+    if encoded:
+        img.encode_b64()
+
+    return img
+
+
+def openjourney_gen_image_replicate(client:replicate.Client, prompt: str, 
                           size:int = 512, encoded:bool=False)->str:
     
     model = client.models.get("prompthero/openjourney")
@@ -67,7 +86,7 @@ def openjourney_gen_image(client:replicate.Client, prompt: str,
     stream = requests.get(response[0], stream=True).raw
     stream:bytes = stream.data
 
-    img = Image(prompt, 'png', stream)
+    img = GameObj(prompt, 'png', stream)
     
     if encoded:
         img.encode_b64()

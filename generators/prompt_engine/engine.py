@@ -1,6 +1,6 @@
 import prompt_engine.gen_image as gen_image
 import prompt_engine.gen_text as gen_text
-from prompt_engine.objects import Image
+from prompt_engine.objects import GameObj
 
 import openai
 import replicate
@@ -35,9 +35,9 @@ class Engine:
         self.check_replicate = True
 
 
-    def imagine(self, list_size:int=1, img_size:int = 512) -> list[Image]:
+    def imagine(self, list_size:int=1, img_size:int = 512) -> list[GameObj]:
         
-        imgs:list[Image] = []
+        imgs:list[GameObj] = []
 
         if self.check_openai:
             prompts = gen_text.chatgpt_gen_prompts_list(list_size)
@@ -45,7 +45,7 @@ class Engine:
             print(f'prompt = {prompts}')
 
             for prompt in prompts:
-                img = gen_image.dalle2_gen_image(prompt, encoded=True)
+                img = gen_image.openjourney_gen_image_hgg(prompt, encoded=False)
                 imgs.append(img)
 
             print('images ok')

@@ -4,7 +4,7 @@ import os
 import openai
 import replicate
 
-class Image:
+class GameObj:
 
     prompt:str = None
     format:str = None

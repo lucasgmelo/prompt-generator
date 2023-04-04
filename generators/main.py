@@ -3,7 +3,7 @@ import requests
 
 URL_MULTI = 'http://localhost:3003/prompts'
 URL = 'http://localhost:3003/prompt'
-OPENAI_API_KEY = ""
+OPENAI_API_KEY = "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"
 
 if __name__ == '__main__':
     
@@ -11,6 +11,8 @@ if __name__ == '__main__':
 
     images = engine.imagine(1)
     img = images[0]
+    #img.save('generators')
+    img.encode_b64()
 
     payload = {
         'prompt':img.prompt, 
