@@ -1,6 +1,6 @@
 import openai       #openAI API
 import replicate    #multi models API (using openjourney)
-
+from time import sleep
 import requests     #web requests
 
 from prompt_engine.objects import GameObj
@@ -37,9 +37,15 @@ def openjourney_gen_image_hgg(prompt:str, encoded:bool=False) -> str:
     base_prompt = 'mdjrny-v4 style ' + prompt
     payload = {"inputs": base_prompt,}
 
-
-    response = requests.post(API_URL, headers=headers, json=payload)
-    stream = response.content
+    repeat = True
+    while repeat:
+        response = requests.post(API_URL, headers=headers, json=payload)
+        stream = response.content
+        if b'error' in stream:
+            print(b'error' not in stream, stream)
+            sleep(30)
+        else:
+            repeat = False
 
 
     img = GameObj(prompt, 'png', stream)
