@@ -3,8 +3,7 @@ import replicate    #multi models API (using openjourney)
 from time import sleep
 import requests     #web requests
 
-from prompt_engine.objects import GameObj
-
+from prompt_engine.objects import GameObj, ImagePrompt
 
 def dalle2_gen_image(prompt:str, 
                      size:int = 512, encoded:bool=False)->str:
@@ -26,15 +25,19 @@ def dalle2_gen_image(prompt:str,
     if encoded:
         img.encode_b64()
 
-    #img.save("imgs/dalle2")
-
     return img
 
 def openjourney_gen_image_hgg(prompt:str, encoded:bool=False) -> str:
     API_URL = "https://api-inference.huggingface.co/models/prompthero/openjourney-v4"
     headers = {"Authorization": "Bearer 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"}
 
-    base_prompt = 'mdjrny-v4 style ' + prompt
+    prpt_eng = ImagePrompt(prompt)
+    prpt_eng.get_adjectives(10)
+    prpt_eng.get_lighting(4, 'templates/lighting_stiles.txt')
+    prpt_eng.get_artists(10, 'templates/mtg_artists.txt')
+    full_prompt = prpt_eng.final_prpt(0,2,1,0,2)
+
+    base_prompt = 'mdjrny-v4 style ' + full_prompt
     payload = {"inputs": base_prompt,}
 
     repeat = True
@@ -48,7 +51,7 @@ def openjourney_gen_image_hgg(prompt:str, encoded:bool=False) -> str:
             repeat = False
 
 
-    img = GameObj(prompt, 'png', stream)
+    img = GameObj(prompt, 'png', stream, base_prompt)
 
     if encoded:
         img.encode_b64()
@@ -96,7 +99,5 @@ def openjourney_gen_image_replicate(client:replicate.Client, prompt: str,
     
     if encoded:
         img.encode_b64()
-    
-    #img.save("imgs/open_journey")
 
     return img

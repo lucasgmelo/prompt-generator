@@ -1,5 +1,9 @@
 from prompt_engine.engine import Engine
 import requests
+import logging
+logging.basicConfig(filename='execution.log', 
+                    level=logging.INFO)
+
 
 URL_MULTI = 'http://localhost:3003/prompts'
 URL = 'http://localhost:3003/prompt'
@@ -11,7 +15,7 @@ if __name__ == '__main__':
 
     images = engine.imagine(1)
     img = images[0]
-    #img.save('generators')
+    img.save('outputs')
     img.encode_b64()
 
     payload = {
