@@ -9,3 +9,7 @@ skatebord
 penguins
 giraffe
 butterfly
+Wizard
+Harry Potter
+Alien
+Tiger

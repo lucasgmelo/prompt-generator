@@ -7,7 +7,7 @@ OPENAI_API_KEY = keys.OPENAI_API_KEY
 openai.api_key = OPENAI_API_KEY
 
 subjects = []
-with open('generators/prompt_engine/templates/txt/subjects.txt', 'r') as file:
+with open('C:/Users/gugac/prompt.io server/prompt-api/generators/prompt_engine/templates/txt/subjects.txt', 'r') as file:
     for subject in file.readlines():
         subjects.append(subject.split('\n')[0])
 
@@ -34,10 +34,12 @@ for _ in range(3):
         Cat dressed as a lobster\n
         Sonic outrunning Flash'''
     
-    PROMPT += ''' \nYou are not alowed to use the following subjects in the phrases you are going to generate\n'''
+    PROMPT += ''' \nYou are NOT ALLOWED to use IN ANY SUBSTANCE OR CIRCUMSTANCES the following characters in the phrases you are going to generate\n'''
 
     for subject in subjects:
         PROMPT += f'{subject}\n'
+
+    PROMPT += ''' I Repeat DO NOT USE any of the characters that i sended above.'''
 
 
     new_prompt = eng.get_elements(PROMPT)
@@ -70,3 +72,22 @@ time.sleep(30)
 new_prompts = eng.get_elements(EXTRACT_PROMPT)
 
 print(new_prompts)
+
+answer = str(new_prompts)
+
+if ',' in answer:
+    answer = answer.replace(', ', '\n')
+if '. ' in answer:
+    answer = answer.replace('. ', '')
+if '.' in answer:
+    answer = answer.replace('.', '')
+
+for letter in answer:
+    if letter.isdigit():
+        answer = answer.replace(letter, '\n')
+
+print(answer)
+
+with open('C:/Users/gugac/prompt.io server/prompt-api/generators/prompt_engine/templates/txt/subjects.txt', 'a') as adding:
+    adding.write('\n')
+    adding.write(answer)
