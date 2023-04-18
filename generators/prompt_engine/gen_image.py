@@ -27,14 +27,15 @@ def dalle2_gen_image(prompt:str,
 
     return img
 
+
 def openjourney_gen_image_hgg(prompt:str, encoded:bool=False) -> str:
     API_URL = "https://api-inference.huggingface.co/models/prompthero/openjourney-v4"
     headers = {"Authorization": "Bearer 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"}
 
     prpt_eng = ImagePrompt(prompt)
     prpt_eng.get_adjectives(10)
-    prpt_eng.get_lighting(4, 'templates/lighting_stiles.txt')
-    prpt_eng.get_artists(10, 'templates/mtg_artists.txt')
+    prpt_eng.get_lighting(4, 'prompt_engine/templates/img/lighting_stiles.txt')
+    prpt_eng.get_artists(10, 'prompt_engine/templates/img/mtg_artists.txt')
     full_prompt = prpt_eng.final_prpt(0,2,1,0,2)
 
     base_prompt = 'mdjrny-v4 style ' + full_prompt

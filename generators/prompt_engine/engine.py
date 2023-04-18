@@ -5,6 +5,13 @@ from prompt_engine.objects import GameObj
 import openai
 import replicate
 
+import requests
+import datetime
+import logging
+import os
+
+import random
+
 class Engine:
 
     check_openai:bool = None
@@ -35,20 +42,29 @@ class Engine:
         self.check_replicate = True
 
 
-    def imagine(self, list_size:int=1, img_size:int = 512) -> list[GameObj]:
-        
-        imgs:list[GameObj] = []
+
+    def imagine(self, num_imgs:int=1, img_size:int = 512, save_path:str='outputs', server_url:str ='', num_keywords:int=3, themes_path:str='') -> list[GameObj]:
 
         if self.check_openai:
-            prompts = gen_text.chatgpt_gen_prompts_list(list_size)
+           
+            prompts = gen_text.chatgpt_gen_prompts_list(num_imgs, num_keywords, themes_path)
 
             print(f'prompt = {prompts}')
 
             for prompt in prompts:
-                img = gen_image.openjourney_gen_image_hgg(prompt, encoded=False)
-                imgs.append(img)
+                img:GameObj = gen_image.openjourney_gen_image_hgg(prompt, encoded=False)
+                img.save(save_path)
+                if server_url != '':
+                    img.encode_b64()
 
-            print('images ok')
+                    payload = {
+                        'prompt':img.prompt, 
+                        'image':img.to_string()
+                    }
 
-        return imgs
+                    #post request to url
+                    post_response = requests.post(server_url, json=payload)
+                    now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                    logging.info(f'{now} - {post_response} - {img.full_prompt}')
+
 

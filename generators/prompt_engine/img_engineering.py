@@ -216,7 +216,7 @@ def get_elements(prompt) -> list[str]:
 
     content = response["choices"][0]["message"]["content"]
 
-    print(content)
+    #print(content)
 
     return content
 
