@@ -12,12 +12,16 @@ const {
   deleteList,
 } = require("../repositories/listRepositories");
 
+const { createUsed } = require("../repositories/usedRepositories");
+
 module.exports = {
   list: async (req, res) => {
     try {
-      const lists = await getList();
+      const prompts = await getPrompts();
 
-      res.send(lists);
+      if(prompts.length < 1 ) return res.status(400).send('There are no prompts');
+
+      return res.send(prompts[0]);
     } catch (error) {
       res.status(400).send(error);
     }
@@ -25,10 +29,29 @@ module.exports = {
   create: async (req, res) => {
     try {
       const newPrompt = await createPrompt(req.body);
-      await createList({ key: newPrompt.id });
 
       res.status(201).send(newPrompt);
     } catch (error) {
+      res.status(400).send(error);
+    }
+  },
+  dayRoutine: async (req, res) => {
+    try {
+      const prompts = await getPrompts();
+      
+      if(prompts.length > 1) {
+        const newUsed = {
+          prompt: prompts[0].prompt,
+          image: prompts[0].image,
+        }
+        
+        await createUsed(newUsed)
+        await deletePrompt(prompts[0].id)
+  
+        res.status(201).send('Done!');
+      }
+    } catch (error) {
+      console.log(error)
       res.status(400).send(error);
     }
   },

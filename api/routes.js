@@ -4,7 +4,7 @@ const promptController = require("./controllers/promptController.js");
 
 const router = Router();
 
-router.route("/prompts").post(promptController.create);
+router.route("/routine").get(promptController.dayRoutine);
 router
   .route("/prompt")
   .get(promptController.list)
