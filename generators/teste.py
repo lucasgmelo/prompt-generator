@@ -1,9 +1,9 @@
 import openai
 import time
 import prompt_engine.img_engineering as eng
+import prompt_engine.apikeys as keys
 
-
-OPENAI_API_KEY = "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"
+OPENAI_API_KEY = keys.OPENAI_API_KEY
 openai.api_key = OPENAI_API_KEY
 
 subjects = []

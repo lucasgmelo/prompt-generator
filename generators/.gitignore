@@ -226,3 +226,7 @@ cython_debug/
 # 3D Images
 *.3dm
 *.max
+
+
+#API KEYS
+*/apikeys.py

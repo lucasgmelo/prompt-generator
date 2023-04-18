@@ -1,6 +1,8 @@
 import openai       #openAI API
 import os
 import random
+import prompt_engine.apikeys as keys
+
 
 from time import sleep
 
@@ -113,7 +115,7 @@ def chatgpt_gen_prompts_list(num_imgs:int, num_keywords:int, themes_path:str)->l
 
 if __name__ == "__main__":
      
-    OPENAI_API_KEY = "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"
+    OPENAI_API_KEY = keys.OPENAI_API_KEY
     openai.api_key = OPENAI_API_KEY
 
     prompts = chatgpt_gen_prompts_list(20, 3, 'C:/LUCAS/UFPE/5o_PERIODO/Multimidia/prompt-api/generators/prompt_engine/templates/txt/themes.txt')

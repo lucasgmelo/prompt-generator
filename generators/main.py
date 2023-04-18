@@ -1,4 +1,6 @@
 from prompt_engine.engine import Engine
+import prompt_engine.apikeys as keys
+
 import requests
 import datetime
 import logging
@@ -8,7 +10,7 @@ logging.basicConfig(filename='execution.log',
 
 URL_MULTI = 'http://localhost:3003/prompts'
 URL = 'http://localhost:3003/prompt'
-OPENAI_API_KEY = "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"
+OPENAI_API_KEY = keys.OPENAI_API_KEY
 
 if __name__ == '__main__':
     
