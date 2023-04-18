@@ -13,3 +13,55 @@ Wizard
 Harry Potter
 Alien
 Tiger
+Piano
+Ocean
+Cowboy
+Tornado
+Chef
+Fireflies
+Ghost
+Castle
+Pirate
+Treasure
+Dragon
+Ice
+Astronaut
+Space
+Bee
+Flower
+Surfer
+Hiker
+Gorilla
+Ball
+Firefighter
+Cyclist
+Bulldog
+Couch
+Eagle
+Snake
+pavement
+Race car
+turn
+Ship
+waters
+Moon
+city skyline
+Fire
+forest
+Panda
+bamboo
+Batman
+Bear
+Spider
+Penguin
+Octopus
+Dolphin
+Hoops
+Rhino
+Savannah
+Cyclops
+Scientist
+Koala
+Tree hollow
+Magic carpet
+Enchanted fountain
