@@ -15,6 +15,7 @@ sports events
 action scenes
 music instruments
 animals
-magic jewels
 magic tools
-landscapes
+magic landscapes
+horror
+apocalypse

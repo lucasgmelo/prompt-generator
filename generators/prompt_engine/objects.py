@@ -1,6 +1,6 @@
 import base64
 import os
-from random import choices
+from random import sample
 from time import sleep
 
 import openai
@@ -225,7 +225,7 @@ class ImagePrompt:
         
         #ADD ADJECTIVES
         if k_adj > 0 and k_adj <= len(self.adjectives):
-            rand_adjs = choices(self.adjectives, k=k_adj)
+            rand_adjs = sample(self.adjectives, k=k_adj)
             for adj in rand_adjs:
                 prompt += ', ' + adj
         elif k_adj == 0:
@@ -235,7 +235,7 @@ class ImagePrompt:
         
         #ADD LIGHTING
         if k_light > 0 and k_light <= len(self.adjectives):
-            rand_lights = choices(self.lighting, k=k_light)
+            rand_lights = sample(self.lighting, k=k_light)
             for light in rand_lights:
                 prompt += ', ' + light
         elif k_light == 0:
@@ -250,7 +250,7 @@ class ImagePrompt:
         #ADD COLOR PALETT
         if k_color > 0 and k_color <= len(self.color_palett):
             prompt += ', Color palett: ' 
-            rand_colors = choices(self.color_palett, k=k_color)
+            rand_colors = sample(self.color_palett, k=k_color)
             for color in rand_colors:
                 prompt += color + ', '
 
@@ -262,7 +262,7 @@ class ImagePrompt:
 
         #ADD ARTISTS
         if k_artists > 0 and k_artists <= len(self.artists):
-            rand_artists = choices(self.artists, k=k_artists)
+            rand_artists = sample(self.artists, k=k_artists)
             for artist in rand_artists:
                 prompt += ', Art by ' + artist
         elif k_artists == 0:

@@ -1,67 +1,100 @@
-messi
-unicorn
-elephant
-spiderman
-superman
-robot
-mermaid
-skatebord
-penguins
-giraffe
-butterfly
-Wizard
-Harry Potter
-Alien
-Tiger
-Piano
-Ocean
-Cowboy
-Tornado
-Chef
-Fireflies
-Ghost
-Castle
-Pirate
-Treasure
+Android
+Teleportation
+wand
+book
+crystal ball
+potion
+Manhunter
+Phantom Stranger
+Clock
+Teapot
+Tree
+Giant snail
+Blue Beetle
+Atom
+Zatanna
+Hawkman
+Time-traveler
+Earth
+storm
+creatures
+virus
+destruction
+Winnie the Pooh
+Elsa
+Peter Pan
+Sleeping Beauty
+Unicorn
 Dragon
-Ice
-Astronaut
-Space
-Bee
-Flower
-Surfer
-Hiker
-Gorilla
-Ball
-Firefighter
-Cyclist
-Bulldog
-Couch
-Eagle
-Snake
-pavement
-Race car
-turn
-Ship
-waters
-Moon
-city skyline
-Fire
-forest
-Panda
-bamboo
-Batman
-Bear
-Spider
-Penguin
+Mermaid
+Hippogriff
+Sasquatch
+Saxophone
+Trombone
+Flute
+Violin
+Saxophonist
+Flutist
+Saxophonist
+Iron Man
+Hulk
+Cinderella
+Ariel
+Rapunzel
+Tinkerbell
+Beyoncé
+Ghostly figure
+Eyes
+Child
+Haunted doll
+Goku
+Sasuke
+Flying fish
+Giraffe
 Octopus
-Dolphin
-Hoops
-Rhino
-Savannah
+Goblin
+Warlock
+Minotaur
+Zeus
 Cyclops
-Scientist
-Koala
-Tree hollow
-Magic carpet
-Enchanted fountain
+Sphinx
+Naruto
+Ichigo
+Gon
+Groot
+Loki
+Sailor Moon
+Phoenix
+Gryphon
+Centaur
+Chimera
+Dog
+Teacup
+Vampire bat
+Werewolf
+Zombie horde
+Demon
+Pirate
+Giant
+Tsunami
+Ninja
+Race car
+Samurai
+Skier
+Skateboarder
+BMX rider
+Ghost
+Asylum
+Zombie
+Forest
+Fish
+Elephant
+Penguin
+Kangaroo
+Gorilla
+Toucan
+Shark
+Lion
+Alien
+Thor
+Doctor Strange

@@ -8,10 +8,29 @@ import os
 OPENAI_API_KEY = keys.OPENAI_API_KEY
 openai.api_key = OPENAI_API_KEY
 
-themes_path = 'C:/Users/gugac/prompt.io server/prompt-api/generators/prompt_engine/templates/txt/themes.txt'
-num_ideas = 20
+
+def limit_file_lines(nome_arquivo, limit=200):
+    with open(nome_arquivo, 'r+') as arquivo:
+        linhas = arquivo.readlines()
+        if len(linhas) > limit:
+            arquivo.seek(0)
+            arquivo.truncate()
+            arquivo.write(''.join(linhas[-limit:]))
+
+def remove_non_ascii(lista):
+    nova_lista = []
+    for item in lista:
+        if all(ord(caractere) < 128 for caractere in item):
+            nova_lista.append(item)
+    return nova_lista
+
+themes_path = 'generators/prompt_engine/templates/txt/themes.txt'
+control_path = 'generators/prompt_engine/templates/txt/subjects.txt'
+num_ideas = 30
 not_repeated = []
 num_keywords = 3
+max_chars = 30
+ideas_per_index = 6
 
 if os.path.exists(themes_path):
     with open(themes_path, 'r') as file:
@@ -25,7 +44,7 @@ while len(not_repeated) < num_ideas:
     
     #Pega palavras proibidas
     subjects = []
-    with open('C:/Users/gugac/prompt.io server/prompt-api/generators/prompt_engine/templates/txt/subjects.txt', 'r') as file:
+    with open(control_path, 'r') as file:
         for subject in file.readlines():
             subjects.append(subject.split('\n')[0])
     
@@ -38,9 +57,9 @@ while len(not_repeated) < num_ideas:
     
     #escolhe o tema da iteracao
     theme = random.choice(themes)
-    print(theme)
+    print('theme: ', theme)
 
-    PROMPT = f'''I want you to make only {5} more small phrases like the following\n
+    PROMPT = f'''I want you to make only {ideas_per_index} more small phrases like the following\n
                 
         Messi riding a motorcycle\n
         Asteroid hitting a Plane\n
@@ -59,8 +78,9 @@ while len(not_repeated) < num_ideas:
         PROMPT += f'{subject}\n'
 
 
-    response = eng.get_elements(PROMPT)
+    response = eng.get_elements(PROMPT, 0.8)
 
+    print(response)
     new_prompts = response.split("\n")
 
     # Remover linhas em branco
@@ -69,21 +89,24 @@ while len(not_repeated) < num_ideas:
 
     # remover indices gerados no gpt3
     i = 0
+    special_chars = ['@', '#', '!', '$', '%', '&', '*', '(', ')', '-', '_', '+', '=', '/', '\\', '[', ']', '{', '}', '|', ';', ':', ',', '.', '<', '>', '?', '°', '¬', '¢', '£', '¥', '§', 'ª', 'º', 'µ', '±', '\'', '`']
     for prompt in new_prompts:
-        prompt = prompt.split(' ')
-        prompt.pop(0)
-        prompt = " ".join(prompt)
+        if prompt[0].isdigit():
+            prompt = prompt.split(' ')
+            prompt.pop(0)
+            prompt = " ".join(prompt)
 
-        if '\'' in prompt:
-            prompt.replace('\'', '')
-        if '-' in prompt:
-            prompt = prompt.replace('-', ' ')
+        for char in special_chars:
+            if char in prompt:
+                prompt = prompt.replace(char, '')
 
         new_prompts[i] = prompt.strip()
         i += 1
         
 
     ideas += new_prompts
+
+    ideas = remove_non_ascii(ideas)
 
     print(len(ideas))
     print(ideas)
@@ -93,7 +116,12 @@ while len(not_repeated) < num_ideas:
     # Tratamento caso ainda haja prompts com palavras proibidas
     checker = False
     for idea in ideas:
+        if len(idea) > max_chars:
+            continue
+
         for subject in subjects:
+            if subject == '':
+                continue
             if subject.upper() in idea.upper():
                 checker = True
                 break
@@ -103,12 +131,13 @@ while len(not_repeated) < num_ideas:
         checker = False
 
 
-    print(len(not_repeated))
-    print(not_repeated)
+    print('LEN NOT REPEATED: ',len(not_repeated))
+    print('NOT REPEATED: ',not_repeated)
 
+    # Adicionar palavras novas ao arquivo de controle 
     if len(round_ideas) != 0:
-        # Adicionar palavras novas ao arquivo de controle 
-        EXTRACT_PROMPT = f'''Your job is to Extract the main characteres of the phrases I give you. For that follow the exemple:\n 
+        
+        EXTRACT_PROMPT = f'''Your job is to Extract one main charactere of each phrase I give you. For that follow the exemple:\n 
                         Exemple:\n
                         Input:\n
                         Messi riding a motorcycle\n
@@ -116,7 +145,7 @@ while len(not_repeated) < num_ideas:
                         Mickey in a blueberry jar\n
                         Output:\n
                         Messi\n
-                        Asteroid, Plane\n
+                        Plane\n
                         Mickey\n
                         Now its  your time:\n
                         '''
@@ -124,11 +153,11 @@ while len(not_repeated) < num_ideas:
         for phrase in round_ideas:
             EXTRACT_PROMPT += f'{phrase}\n'
 
-        new_prompts = eng.get_elements(EXTRACT_PROMPT)
+        response = eng.get_elements(EXTRACT_PROMPT, 0.3)
 
-        print(new_prompts)
+        print(response)
 
-        forbiden_words = str(new_prompts)
+        forbiden_words = str(response)
 
         if ',' in forbiden_words:
             forbiden_words = forbiden_words.replace(', ', '\n')
@@ -143,23 +172,33 @@ while len(not_repeated) < num_ideas:
 
         forbiden_words = forbiden_words.split('\n')
 
+        for word in forbiden_words:
+            word = word.strip()
+
         # Remover linhas em branco
         while '' in forbiden_words:
                 forbiden_words.remove('')
 
         print(forbiden_words)
-        last = forbiden_words[-1]
 
-        with open('C:/Users/gugac/prompt.io server/prompt-api/generators/prompt_engine/templates/txt/subjects.txt', 'a') as adding:
-            adding.write('\n')
-            for itens in forbiden_words:
-                adding.write(itens)
-                if itens != last:
-                    adding.write('\n')
+        with open(control_path, 'a') as adding:
+            for word in forbiden_words:
+                adding.write(word)
+                adding.write('\n')
                     
         adding.close()
 
+    # Limitar o tamanho do arquivo de controle
+    limit_file_lines(control_path, limit=100)
+
 # Garantir que a lista tera o numero desejado de ideias, e que elas estão embaralhadas
 not_repeated = random.sample(not_repeated, k=num_ideas)
+
+with open('generators/prompt_engine/templates/txt/outputs.txt', 'a') as file:
+            for item in not_repeated:
+                file.write(item)
+                file.write('\n')
+                    
+file.close()
 
 print(not_repeated)

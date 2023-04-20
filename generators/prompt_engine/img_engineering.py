@@ -200,18 +200,19 @@ def add_artist_prpt(base_prompt:str, num_artists:int, artist_list_path:str = Non
 
     return prompt
 
-def get_elements(prompt) -> list[str]:
+def get_elements(prompt, temperature=1) -> list[str]:
     error = True
     while error:
         try:
             response = openai.ChatCompletion.create(
                 model="gpt-3.5-turbo", 
-                messages=[{"role": "user", "content": prompt}]
+                messages=[{"role": "user", "content": prompt}],
+                temperature = temperature
             )
             error = False
         except:
-            print('FAILED TO GET ELEMENTS')
-            sleep(20)
+            print('FAILED TO RECEIVE GPT MSG')
+            sleep(30)
             continue
 
     content = response["choices"][0]["message"]["content"]
