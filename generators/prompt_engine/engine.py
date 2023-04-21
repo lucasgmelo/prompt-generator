@@ -1,5 +1,6 @@
 import prompt_engine.gen_image as gen_image
 import prompt_engine.gen_text as gen_text
+import prompt_engine.gen_text2 as gen_text2
 from prompt_engine.objects import GameObj
 
 import openai
@@ -43,11 +44,15 @@ class Engine:
 
 
 
-    def imagine(self, num_imgs:int=1, img_size:int = 512, save_path:str='outputs', server_url:str ='', num_keywords:int=3, themes_path:str='') -> list[GameObj]:
+    def imagine(self, num_imgs:int=1, img_size:int = 512, save_path:str='outputs', server_url:str ='', num_keywords:int=3, 
+                themes_path:str='', control_path='', max_chars=30, ideas_per_index=6) -> list[GameObj]:
 
         if self.check_openai:
+
+            themes_path = 'prompt_engine/templates/txt/themes.txt'
+            control_path = 'prompt_engine/templates/txt/subjects.txt'
            
-            prompts = gen_text.chatgpt_gen_prompts_list(num_imgs, num_keywords, themes_path)
+            prompts = gen_text2.chatgpt_gen_prompts_list(num_imgs, themes_path,control_path, num_keywords, max_chars, ideas_per_index)
 
             print(f'prompt = {prompts}')
 

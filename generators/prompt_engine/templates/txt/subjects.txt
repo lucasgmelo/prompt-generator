@@ -1,44 +1,3 @@
-Android
-Teleportation
-wand
-book
-crystal ball
-potion
-Manhunter
-Phantom Stranger
-Clock
-Teapot
-Tree
-Giant snail
-Blue Beetle
-Atom
-Zatanna
-Hawkman
-Time-traveler
-Earth
-storm
-creatures
-virus
-destruction
-Winnie the Pooh
-Elsa
-Peter Pan
-Sleeping Beauty
-Unicorn
-Dragon
-Mermaid
-Hippogriff
-Sasquatch
-Saxophone
-Trombone
-Flute
-Violin
-Saxophonist
-Flutist
-Saxophonist
-Iron Man
-Hulk
-Cinderella
 Ariel
 Rapunzel
 Tinkerbell
@@ -98,3 +57,44 @@ Lion
 Alien
 Thor
 Doctor Strange
+Drummer
+Pianist
+Guitarist
+Trumpeter
+Bassist
+Hawkeye
+Drax
+Robot
+Cyborg
+Time portal
+Intergalactic
+Mutant
+Clone army
+Medusa
+Poseidon
+Oprah
+Beyonce
+Taylor Swift
+Lady Gaga
+Batman
+Superman
+Wonder Woman
+Flash
+Android
+Laser gun
+Wizard
+Spellbook
+Castle
+Mercurial river
+Unicorn
+Swimmer
+Runner
+Cyclist
+Pizza
+Soup
+Genie
+Volcano
+Dollhouse
+Clown
+Creature
+Painting

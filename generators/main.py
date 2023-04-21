@@ -16,9 +16,11 @@ if __name__ == '__main__':
     
     engine = Engine(openai_api_key = OPENAI_API_KEY)
 
-    engine.imagine(num_imgs=5,
+    engine.imagine(num_imgs=10,
                    save_path='C:/LUCAS/UFPE/5o_PERIODO/Multimidia/prompt-api/generators/outputs',
-                   server_url=URL)
+                   themes_path='C:/LUCAS/UFPE/5o_PERIODO/Multimidia/prompt-api/generators/prompt_engine/templates/txt/themes.txt',
+                   control_path='C:/LUCAS/UFPE/5o_PERIODO/Multimidia/prompt-api/generators/prompt_engine/templates/txt/subjects.txt'
+                   )
     
     
     '''images = engine.imagine(3)
