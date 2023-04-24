@@ -81,7 +81,8 @@ def chatgpt_gen_prompts_list(num_ideas, themes_path, control_path, num_keywords=
 
         # remover indices gerados no gpt3
         i = 0
-        special_chars = ['@', '#', '!', '$', '%', '&', '*', '(', ')', '-', '_', '+', '=', '/', '\\', '[', ']', '{', '}', '|', ';', ':', ',', '.', '<', '>', '?', '°', '¬', '¢', '£', '¥', '§', 'ª', 'º', 'µ', '±', '\'', '`']
+        special_chars = ['@', '#', '!', '$', '%', '&', '*', '(', ')', '+', '=', '/', '\\', '[', ']', '{', '}', '|', ';', ':', ',', '.', '<', '>', '?', '°', '¬', '¢', '£', '¥', '§', 'ª', 'º', 'µ', '±', '\'', '`']
+        separators = ['-', '_',]
         for prompt in new_prompts:
             if prompt[0].isdigit():
                 prompt = prompt.split(' ')
@@ -91,6 +92,10 @@ def chatgpt_gen_prompts_list(num_ideas, themes_path, control_path, num_keywords=
             for char in special_chars:
                 if char in prompt:
                     prompt = prompt.replace(char, '')
+
+            for char in separators:
+                if char in prompt:
+                    prompt = prompt.replace(char, ' ')
 
             new_prompts[i] = prompt.strip()
             i += 1

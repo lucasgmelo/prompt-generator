@@ -1,100 +1,64 @@
-Ariel
-Rapunzel
-Tinkerbell
-Beyoncé
-Ghostly figure
-Eyes
-Child
-Haunted doll
-Goku
-Sasuke
-Flying fish
-Giraffe
-Octopus
-Goblin
-Warlock
-Minotaur
-Zeus
-Cyclops
-Sphinx
-Naruto
-Ichigo
-Gon
-Groot
-Loki
-Sailor Moon
-Phoenix
-Gryphon
-Centaur
-Chimera
-Dog
-Teacup
-Vampire bat
-Werewolf
-Zombie horde
-Demon
-Pirate
-Giant
-Tsunami
-Ninja
-Race car
-Samurai
-Skier
-Skateboarder
-BMX rider
-Ghost
-Asylum
-Zombie
-Forest
 Fish
-Elephant
-Penguin
-Kangaroo
-Gorilla
-Toucan
-Shark
-Lion
-Alien
-Thor
-Doctor Strange
-Drummer
-Pianist
-Guitarist
-Trumpeter
-Bassist
-Hawkeye
-Drax
-Robot
-Cyborg
-Time portal
-Intergalactic
-Mutant
-Clone army
-Medusa
-Poseidon
-Oprah
-Beyonce
-Taylor Swift
-Lady Gaga
-Batman
-Superman
-Wonder Woman
-Flash
-Android
-Laser gun
+Cheetah
+Dragon
+Knight
+Princess
 Wizard
-Spellbook
 Castle
-Mercurial river
-Unicorn
-Swimmer
-Runner
-Cyclist
-Pizza
-Soup
-Genie
-Volcano
-Dollhouse
-Clown
-Creature
-Painting
+Panda
+Giraffe
+Kangaroo
+Elephant
+Lion
+Monkey
+Robot
+Alien
+Mirror
+Book
+Ball
+Lamp
+Helicopter
+Skateboard
+Jet ski
+Airplane
+Scooter
+Mermaid
+Wand
+Sorcerer
+Warrior
+Joker
+Magneto
+Sunflower
+Cactus
+Snowman
+Mountains
+Fireflies
+Waterfall
+Superman
+Queen
+Dwarf
+Crystal key
+Cyborg
+Captain America
+Spiderman
+Hulk
+Iron Man
+Black Widow
+Desert oasis
+Misty forest
+Raging river
+Starry night sky
+Sandy beach
+Flamingo
+Clocks
+Umbrella
+Octopus
+Giant snail
+Butterfly
+Mannequins
+Moon
+Flash
+Cupid
+Lovebirds
+Hands
+Roses

@@ -230,3 +230,5 @@ cython_debug/
 
 #API KEYS
 */apikeys.py
+
+*.zip

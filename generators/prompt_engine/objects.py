@@ -116,10 +116,14 @@ class ImagePrompt:
         adjectives = get_elements(prompt)
 
         if adj_list_path is None:
-            adjectives = adjectives.split('\n')
-
-            for i in range(len(adjectives)):
-                adjectives[i] = adjectives[i].split('. ')[1]
+            
+            if adjectives[0].isdigit():
+                adjectives = adjectives.split('\n')
+                for i in range(len(adjectives)):
+                    adjectives[i] = adjectives[i].split('. ')[1]
+            else:
+                adjectives = adjectives.split(', ')
+               
         else:
             adjectives = adjectives.split(', ')
 

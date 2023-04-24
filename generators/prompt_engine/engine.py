@@ -12,6 +12,7 @@ import logging
 import os
 
 import random
+from time import sleep
 
 class Engine:
 
@@ -68,7 +69,14 @@ class Engine:
                     }
 
                     #post request to url
-                    post_response = requests.post(server_url, json=payload)
+                    sent = False
+                    while not sent:
+                        try:
+                            post_response = requests.post(server_url, json=payload)
+                            sent = True
+                        except:
+                            sleep(30)
+                    
                     now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
                     logging.info(f'{now} - {post_response} - {img.full_prompt}')
 

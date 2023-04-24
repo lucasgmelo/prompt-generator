@@ -34,8 +34,8 @@ def openjourney_gen_image_hgg(prompt:str, encoded:bool=False) -> str:
 
     prpt_eng = ImagePrompt(prompt)
     prpt_eng.get_adjectives(10)
-    prpt_eng.get_lighting(4, 'prompt_engine/templates/img/lighting_stiles.txt')
-    prpt_eng.get_artists(10, 'prompt_engine/templates/img/mtg_artists.txt')
+    prpt_eng.get_lighting(4, 'C:/LUCAS/UFPE/5o_PERIODO/Multimidia/prompt-api/generators/prompt_engine/templates/img/lighting_stiles.txt')
+    prpt_eng.get_artists(10, 'C:/LUCAS/UFPE/5o_PERIODO/Multimidia/prompt-api/generators/prompt_engine/templates/img/mtg_artists.txt')
     full_prompt = prpt_eng.final_prpt(0,2,1,0,2)
 
     base_prompt = 'mdjrny-v4 style ' + full_prompt
@@ -45,8 +45,8 @@ def openjourney_gen_image_hgg(prompt:str, encoded:bool=False) -> str:
     while repeat:
         response = requests.post(API_URL, headers=headers, json=payload)
         stream = response.content
-        if b'error' in stream:
-            print(b'error' not in stream, stream)
+        if b'error' in stream or b'<html>' in stream:
+            print('ERROR GETTING STREAM', stream)
             sleep(30)
         else:
             repeat = False
@@ -102,3 +102,4 @@ def openjourney_gen_image_replicate(client:replicate.Client, prompt: str,
         img.encode_b64()
 
     return img
+
